@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 const Comentario = {
     crear: (id_docente, id_estudiante, mensaje, callback) => {
-        const sql = `INSERT INTO comentarios (id_docente, id_estudiante, mensaje) VALUES (?, ?, ?)`;
+        const sql = `INSERT INTO comentarios (id_docente, id_estudiante, mensaje) VALUES (?, ?, ?)`; 
         db.query(sql, [id_docente, id_estudiante, mensaje], callback);
     },
     obtenerTodos: (callback) => {
@@ -20,6 +20,11 @@ const Comentario = {
     eliminar: (id, callback) => {
         const sql = `DELETE FROM comentarios WHERE id = ?`;
         db.query(sql, [id], callback);
+    },
+    // 👇 Agregamos esta función para el estudiante
+    obtenerPorEstudiante: (id_estudiante, callback) => {
+        const sql = `SELECT * FROM comentarios WHERE id_estudiante = ? ORDER BY fecha DESC`;
+        db.query(sql, [id_estudiante], callback);
     }
 };
 

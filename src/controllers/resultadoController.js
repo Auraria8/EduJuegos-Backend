@@ -48,3 +48,12 @@ exports.eliminarResultado = (req, res) => {
         res.json({ mensaje: 'Resultado eliminado correctamente' });
     });
 };
+// 🔍 Obtener resultados del estudiante autenticado
+exports.obtenerResultadosEstudiante = (req, res) => {
+    const id_estudiante = req.user.id;
+
+    Resultado.obtenerPorEstudiante(id_estudiante, (err, results) => {
+        if (err) return res.status(500).json({ mensaje: 'Error al obtener tus resultados' });
+        res.json(results);
+    });
+};
