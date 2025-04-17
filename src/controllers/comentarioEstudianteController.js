@@ -1,4 +1,4 @@
-const Comentario = require('../models/comentario');
+const comentario = require('../models/comentario');
 
 exports.verComentariosEstudiante = (req, res) => {
     const id_estudiante = req.user.id;
