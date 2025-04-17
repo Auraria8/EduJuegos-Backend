@@ -1,7 +1,7 @@
-import Comentario from '../models/comentario_temp';
+const Comentario = require('../models/comentario'); // Apunta a comentario.js
 
 
-export function crearcomentario(req, res) {
+function crearcomentario(req, res) {
     const { id_estudiante, mensaje } = req.body;
     const id_docente = req.docente.id;
 
@@ -9,44 +9,52 @@ export function crearcomentario(req, res) {
         return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
     }
 
-    comentario.crear(id_docente, id_estudiante, mensaje, (err) => {
+    Comentario.crear(id_docente, id_estudiante, mensaje, (err) => {
         if (err) return res.status(500).json({ mensaje: 'Error al registrar el comentario' });
         res.status(201).json({ mensaje: 'Comentario registrado correctamente' });
     });
 }
 
-export function obtenerComentarios(req, res) {
-    comentario.obtenerTodos((err, results) => {
+function obtenerComentarios(req, res) {
+    Comentario.obtenerTodos((err, results) => {
         if (err) return res.status(500).json({ mensaje: 'Error al obtener los comentarios' });
         res.json(results);
     });
 }
 
-export function obtenerComentarioPorId(req, res) {
+function obtenerComentarioPorId(req, res) {
     const { id } = req.params;
 
-    comentario.obtenerPorId(id, (err, results) => {
+    Comentario.obtenerPorId(id, (err, results) => {
         if (err) return res.status(500).json({ mensaje: 'Error al obtener el comentario' });
         if (results.length === 0) return res.status(404).json({ mensaje: 'Comentario no encontrado' });
         res.json(results[0]);
     });
 }
 
-export function actualizarComentario(req, res) {
+function actualizarComentario(req, res) {
     const { id } = req.params;
     const { mensaje } = req.body;
 
-    comentario.actualizar(id, mensaje, (err) => {
+    Comentario.actualizar(id, mensaje, (err) => {
         if (err) return res.status(500).json({ mensaje: 'Error al actualizar el comentario' });
         res.json({ mensaje: 'Comentario actualizado correctamente' });
     });
 }
 
-export function eliminarComentario(req, res) {
+function eliminarComentario(req, res) {
     const { id } = req.params;
 
-    comentario.eliminar(id, (err) => {
+    Comentario.eliminar(id, (err) => {
         if (err) return res.status(500).json({ mensaje: 'Error al eliminar el comentario' });
         res.json({ mensaje: 'Comentario eliminado correctamente' });
     });
 }
+
+module.exports = {
+    crearcomentario,
+    obtenerComentarios,
+    obtenerComentarioPorId,
+    actualizarComentario,
+    eliminarComentario
+};

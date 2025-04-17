@@ -1,4 +1,5 @@
-const Comentario = require('../models/comentario_temp');
+const Comentario = require('../models/comentario'); // 
+
 
 
 exports.verComentariosEstudiante = (req, res) => {
