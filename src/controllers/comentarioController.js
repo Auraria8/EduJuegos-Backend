@@ -1,4 +1,5 @@
-const comentario = require('../models/comentario');
+const Comentario = require('../models/Comentario');
+
 
 exports.crearComentario = (req, res) => {
     const { id_estudiante, mensaje } = req.body;
