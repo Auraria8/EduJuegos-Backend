@@ -1,8 +1,9 @@
+require('dotenv').config(); // Carga .env desde la raíz
 const mysql = require('mysql2');
-require('dotenv').config();
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT, // 💡 si lo tienes definido en .env
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
     database: process.env.DB_NAME
