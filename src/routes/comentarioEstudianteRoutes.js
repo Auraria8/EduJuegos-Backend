@@ -1,8 +1,8 @@
-const express = require('express');
+const express = require('express'); 
 const router = express.Router();
 const comentarioEstudianteController = require('../controllers/comentarioEstudianteController');
-const { verificarTokenEstudiante } = require('../middlewares/authMiddleware');
 
-router.get('/', verificarTokenEstudiante, comentarioEstudianteController.verComentariosEstudiante);
+// ⛔ Sin middleware de token
+router.get('/', comentarioEstudianteController.verComentariosEstudiante);
 
 module.exports = router;

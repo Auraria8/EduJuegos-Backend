@@ -1,11 +1,7 @@
-const Comentario = require('../models/comentario'); // 
-
-
+const Comentario = require('../models/comentario'); // ya está bien
 
 exports.verComentariosEstudiante = (req, res) => {
-    const id_estudiante = req.user.id;
-
-    comentario.obtenerPorEstudiante(id_estudiante, (err, results) => {
+    Comentario.obtenerTodos((err, results) => {
         if (err) {
             return res.status(500).json({ mensaje: 'Error al obtener comentarios' });
         }
@@ -13,4 +9,5 @@ exports.verComentariosEstudiante = (req, res) => {
         res.json(results);
     });
 };
+
 
